@@ -1,0 +1,2 @@
+#include "prod_koto_uboone_numi_rhc_kdar_scalar_mass_170.fcl"
+physics.producers.generator.flux_access_schema: ifdh

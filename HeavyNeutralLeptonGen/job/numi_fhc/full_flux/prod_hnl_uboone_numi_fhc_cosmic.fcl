@@ -1,0 +1,13 @@
+#include "heavy_neutral_lepton_gen_numi.fcl"
+#include "prodgenie_common_cosmic_uboone.fcl"
+
+process_name: HeavyNeutralLeptonGenNuMIFHC
+
+outputs.out1.fileName:    "hnl_numi_fhc_%tc_gen.root" 
+services.TFileService.fileName:  "hnl_gen_hist.root"
+
+# WARNING: these parameters should be set according to your needs
+# default HNL_mass: 100 MeV
+# default model_theta: 5e-4
+# default max_weight: 0 (save all events regardless of weight, e.g. for training samples)
+physics.producers.generator: @local::microboone_heavy_neutral_lepton_gen_numi_fhc

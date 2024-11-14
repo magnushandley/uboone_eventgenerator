@@ -1,0 +1,2 @@
+#include "prod_koto_uboone_numi_fhc_kdar.fcl"
+physics.producers.generator.flux_access_schema: ifdh

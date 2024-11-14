@@ -1,0 +1,2 @@
+#include "prod_hnl_uboone_numi_fhc_kdar_dump_cosmic.fcl"
+physics.producers.generator.flux_access_schema: ifdh

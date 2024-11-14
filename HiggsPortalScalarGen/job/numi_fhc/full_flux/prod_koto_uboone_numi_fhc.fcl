@@ -1,0 +1,13 @@
+#include "higgs_portal_scalar_gen_numi.fcl"
+#include "prodgenie_common_uboone.fcl"
+
+process_name: HiggsPortalScalarGenNuMIFHC
+
+outputs.out1.fileName:    "koto_numi_fhc_%tc_gen.root" 
+services.TFileService.fileName:  "koto_gen_hist.root"
+
+# WARNING: these parameters should be set according to your needs
+# default scalar_mass: 100 MeV
+# default model_theta: 5e-4
+# default max_weight: 0 (save all events regardless of weight, e.g. for training samples)
+physics.producers.generator: @local::microboone_higgs_portal_scalar_gen_numi_fhc

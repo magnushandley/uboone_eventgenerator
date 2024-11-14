@@ -1,0 +1,2 @@
+#include "standard_overlay_gen_hnl_uboone_bnb_kdar.fcl"
+physics.producers.generator.flux_access_schema: ifdh

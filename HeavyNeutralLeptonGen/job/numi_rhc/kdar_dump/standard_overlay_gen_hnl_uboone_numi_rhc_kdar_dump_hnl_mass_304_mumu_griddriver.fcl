@@ -1,0 +1,10 @@
+#include "standard_overlay_gen_hnl_uboone_numi_rhc_kdar_dump.fcl"
+
+
+#physics.producers.generator.tree_only_mode: true
+physics.producers.generator.HNL_mass: 0.304
+physics.producers.generator.model_theta: 6.58e-4
+physics.producers.generator.max_weight: 12998.3
+physics.producers.generator.flux_access_schema: ifdh
+physics.producers.generator.decay_lep_type: 0
+physics.producers.generator.prod_lep_type: 0  # 0 mu 1 e,

@@ -1,0 +1,14 @@
+BEGIN_PROLOG
+
+standard_hepmcfilegen:
+{
+  module_type:   "HepMCFileGen"
+
+  FileSearchPaths: "/pnfs/uboone/persistent/users/mdeltutt/nuwro_events_18.02.1_bnb_nu_geomv12_cryo/eventsout_hepmc/"
+  FilePatterns:    ["eventsout.root_*.hepmc"]
+  EventsPerPOT:    8.188584502865836e-17
+
+  FluxCopyMethod:  "DIRECT"
+}
+
+END_PROLOG 

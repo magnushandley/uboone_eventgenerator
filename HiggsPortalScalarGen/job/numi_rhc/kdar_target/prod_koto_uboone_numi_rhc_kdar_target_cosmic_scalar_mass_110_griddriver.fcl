@@ -1,0 +1,2 @@
+#include "prod_koto_uboone_numi_rhc_kdar_target_cosmic_scalar_mass_110.fcl"
+physics.producers.generator.flux_access_schema: ifdh

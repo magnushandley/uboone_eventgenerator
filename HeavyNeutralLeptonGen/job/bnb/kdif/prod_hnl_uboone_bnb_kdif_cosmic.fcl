@@ -1,0 +1,3 @@
+#include "prod_hnl_uboone_bnb_cosmic.fcl"
+
+physics.producers.generator: @local::microboone_heavy_neutral_lepton_gen_bnb_kdif

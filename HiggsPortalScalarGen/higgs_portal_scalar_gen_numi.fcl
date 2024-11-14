@@ -1,0 +1,102 @@
+BEGIN_PROLOG
+
+microboone_higgs_portal_scalar_gen_numi:
+{
+  module_type: HiggsPortalScalarGenFromNuMIFlux
+  scalar_mass: 0.100 
+  model_theta: 5e-4
+
+  # weight is given by decay_weight * branching_ratio * flux_weight
+  # decay_weight is probability given exponential decay, of decaying inside detector.
+  #     maximum = D^(D/L) L (D+L)^(-(D+L)/L); D= distance of kaon decay from detector; L=path length inside detector
+  # branching_ratio is theta^2 * physical constants = theta^2
+  # flux_weight (=nimpwt / kaon BR); maximum is taken from the flux files = 
+  # technically it is possible to maximise all these
+  #             -> max_weight: 
+  # execution will crash if larger weight is found.
+
+  # here are some suggested max_weights. Interpolate between them.
+  # if you have mass parameters <100 or >200, you will need to recalculate
+  # this was done by generating 1M events, and taking 1.1 * the maximum weight found
+  # FHC flux -------
+  # theta\mass:  100       150       200
+  # 1e-3        5.4e-9    5.0e-9    5.7e-09
+  # 1e-4        1.7e-13   5.1e-13   6.6e-13
+  # 1e-5        6.4e-17   4.4e-17   6.2e-17
+  # RHC flux -------
+  # theta\mass:  100       150       200
+  # 1e-3        2.7e-9    3.3e-9    7.5e-09
+  # 1e-4        2.5e-13   8.0e-13   1.6e-12
+  # 1e-5        2.5e-17   8.5e-17   8.2e-17
+
+  # Default max weight is set to 0 (meaning unweighted, eg for training samples)
+  # if max_weight < 0, then the calculated weight is saved to the MCTruth as the W() of the artificial MCNeutrino
+  max_weight: 0
+  
+}
+
+microboone_higgs_portal_scalar_gen_numi_fhc: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_fhc.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/fhc/all/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/fhc/all/g4numiv6_minervame_me000z200i_*.root"
+
+microboone_higgs_portal_scalar_gen_numi_fhc_kdif: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_fhc_kdif.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/fhc/kdif/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdif.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/fhc/kdif/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdif.select_kaon_decay_type: "kdif"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdif.cut_kaon_mom: 1e-7
+
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_fhc_kdar.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/fhc/kdar/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/fhc/kdar/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar.cut_kaon_mom: 1e-7
+
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/fhc/kdar_target/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/fhc/kdar_target/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target.cut_kaon_mom: 1e-7
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target.cut_kaon_pos: -1
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_target.cut_kaon_z_pos: -59000
+
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/fhc/kdar_dump/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/fhc/kdar_dump/g4numiv6_minervame_me000z200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump.cut_kaon_mom: 1e-7
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump.cut_kaon_pos: 1
+microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump.cut_kaon_z_pos: 6400
+
+microboone_higgs_portal_scalar_gen_numi_rhc: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_rhc.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/rhc/all/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/rhc/all/g4numiv6_minervame_me000z-200i_*.root"
+
+microboone_higgs_portal_scalar_gen_numi_rhc_kdif: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_rhc_kdif.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/rhc/kdif/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdif.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/rhc/kdif/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdif.select_kaon_decay_type: "kdif"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdif.cut_kaon_mom: 1e-7
+
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_rhc_kdar.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/rhc/kdar/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/rhc/kdar/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar.cut_kaon_mom: 1e-7
+
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/rhc/kdar_target/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/rhc/kdar_target/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target.cut_kaon_mom: 1e-7
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target.cut_kaon_pos: -1
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_target.cut_kaon_z_pos: -59000
+
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump: @local::microboone_higgs_portal_scalar_gen_numi
+#microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/numi/rhc/kdar_dump/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/numi/rhc/kdar_dump/g4numiv6_minervame_me000z-200i_*.root"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump.cut_kaon_mom: 1e-7
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump.cut_kaon_pos: 1
+microboone_higgs_portal_scalar_gen_numi_rhc_kdar_dump.cut_kaon_z_pos: 6400
+
+END_PROLOG

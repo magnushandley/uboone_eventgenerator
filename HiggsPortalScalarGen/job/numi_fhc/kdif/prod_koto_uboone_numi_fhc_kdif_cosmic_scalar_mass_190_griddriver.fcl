@@ -1,0 +1,2 @@
+#include "prod_koto_uboone_numi_fhc_kdif_cosmic_scalar_mass_190.fcl"
+physics.producers.generator.flux_access_schema: ifdh

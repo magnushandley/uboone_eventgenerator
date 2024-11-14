@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+
+<!-- Convert hepmc events into LArSoft format -->
+
+<!DOCTYPE project [
+<!ENTITY release "v08_00_00_28">
+<!ENTITY file_type "mc">
+<!ENTITY run_type "physics">
+<!ENTITY username "cthorpe">
+<!ENTITY name "convert_events_uboone_numi_no_overlay_TEST">
+<!ENTITY tag "nuwro">
+<!ENTITY projectout   "/pnfs/uboone/scratch/users/cthorpe/v08_00_00_28/work">
+<!ENTITY logout       "/pnfs/uboone/scratch/users/cthorpe/v08_00_00_28">
+]>
+
+
+<job>
+
+
+<project name="&name;">
+
+<numevents>250</numevents>
+
+<os>SL7</os>
+
+<resource>DEDICATED,OPPORTUNISTIC</resource>
+
+<larsoft>
+<tag>&release;</tag>
+<qual>e17:prof</qual>
+<local>/pnfs/uboone/resilient/users/cthorpe/nuwro_converter/nuwro_converter.tar</local>
+</larsoft>
+
+  <version>prod_&release;</version>
+  <check>0</check>
+
+<stage name="convert">
+<initsource>/pnfs/uboone/resilient/users/cthorpe/nuwro_converter/nuwro_script.sh</initsource>
+<fcl>/pnfs/uboone/resilient/users/cthorpe/nuwro_converter/prodhepmc_uboone.fcl</fcl>
+<outdir>&logout;/&name;_all/out/&release;</outdir>
+<logdir>&logout;/&name;_all/log/&release;</logdir>
+<workdir>&projectout;</workdir>
+<numjobs>5</numjobs>
+<maxfilesperjob>1</maxfilesperjob>
+<filelistdef>1</filelistdef>
+<datafiletypes>root</datafiletypes>
+<datatier>generated</datatier>
+<jobsub> --disk=10GB --expected-lifetime=4h 
+<!-- List of hepmc files you want to use. NOTE: the file must be called hepmc_files.list (this is what the script searches) -->
+-f /pnfs/uboone/scratch/users/cthorpe/samples/uboone_numi_rhc_enriched_overlay_pt1/hepmc/hepmc_files.list
+<!-- Metadata file -->
+-f /pnfs/uboone/scratch/users/cthorpe/samples/uboone_numi_rhc_enriched_overlay_pt1/meta/hepmc_POT.meta
+</jobsub>
+<defname>&name;_gen</defname>
+<memory>4000</memory>
+</stage>
+
+  <!-- file type -->
+  <filetype>&file_type;</filetype>
+
+  <!-- run type -->
+  <runtype>&run_type;</runtype>
+
+</project>
+
+
+</job>

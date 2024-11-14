@@ -1,0 +1,3 @@
+#include "prod_hnl_uboone_numi_rhc.fcl"
+
+physics.producers.generator: @local::microboone_heavy_neutral_lepton_gen_numi_rhc_kdar

@@ -1,0 +1,3 @@
+#include "standard_overlay_gen_koto_uboone_numi_fhc.fcl"
+
+physics.producers.generator: @local::microboone_higgs_portal_scalar_gen_numi_fhc_kdar_dump

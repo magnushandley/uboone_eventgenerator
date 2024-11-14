@@ -1,0 +1,39 @@
+BEGIN_PROLOG
+
+microboone_higgs_portal_scalar_gen_bnb:
+{
+  module_type: HiggsPortalScalarGenFromBNBFlux
+  scalar_mass: 0.100 
+  model_theta: 5e-4
+
+  #flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/bnb/all/april07_baseline_*root"
+  flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/bnb/all/april07_baseline_*root"
+
+  # weight is given by decay_weight * branching_ratio * flux_weight
+  # decay_weight is probability given exponential decay, of decaying inside detector.
+  #     maximum = D^(D/L) L (D+L)^(-(D+L)/L); D= distance of kaon decay from detector; L=path length inside detector
+  # branching_ratio is theta^2 * physical constants = theta^2
+  # flux_weight (=nimpwt / kaon BR); maximum is taken from the flux files = 
+  # technically it is possible to maximise all these
+  #             -> max_weight: 
+  # however, from ~1000 events with m=100MeV theta=5e-4, max=1e-11; added 10% safety factor
+  # execution will crash if larger weight is found.
+
+  # Default max weight is set to 0 (meaning unweighted, eg for training samples)
+  # if max_weight < 0, then the calculated weight is saved to the MCTruth as the W() of the artificial MCNeutrino
+  max_weight: 0
+}
+
+microboone_higgs_portal_scalar_gen_bnb_kdif: @local::microboone_higgs_portal_scalar_gen_bnb
+#microboone_higgs_portal_scalar_gen_bnb_kdif.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/bnb/kdif/april07_baseline_*root"
+microboone_higgs_portal_scalar_gen_bnb_kdif.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/bnb/kdif/april07_baseline_*root"
+microboone_higgs_portal_scalar_gen_bnb_kdif.select_kaon_decay_type: "kdif"
+microboone_higgs_portal_scalar_gen_bnb_kdif.cut_kaon_mom: 3e-3 # GeV
+
+microboone_higgs_portal_scalar_gen_bnb_kdar: @local::microboone_higgs_portal_scalar_gen_bnb
+#microboone_higgs_portal_scalar_gen_bnb_kdar.flux_location: "/pnfs/uboone/persistent/users/guzowski/kaon_flux/bnb/kdar/april07_baseline_*root"
+microboone_higgs_portal_scalar_gen_bnb_kdar.flux_location: "/cvmfs/uboone.osgstorage.org/stash/uboonebeam/kaon_flux/bnb/kdar/april07_baseline_*root"
+microboone_higgs_portal_scalar_gen_bnb_kdar.select_kaon_decay_type: "kdar"
+microboone_higgs_portal_scalar_gen_bnb_kdar.cut_kaon_mom: 3e-3 # GeV
+
+END_PROLOG

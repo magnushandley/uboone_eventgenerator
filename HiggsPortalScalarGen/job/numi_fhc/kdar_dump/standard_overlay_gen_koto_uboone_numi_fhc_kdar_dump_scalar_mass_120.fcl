@@ -1,0 +1,5 @@
+#include "standard_overlay_gen_koto_uboone_numi_fhc_kdar_dump.fcl"
+
+physics.producers.generator.scalar_mass: 0.120
+physics.producers.generator.model_theta: 5.47e-4
+physics.producers.generator.max_weight: 8.13535e-11

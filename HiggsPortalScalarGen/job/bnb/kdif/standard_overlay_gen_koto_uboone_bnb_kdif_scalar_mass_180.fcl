@@ -1,0 +1,5 @@
+#include "standard_overlay_gen_koto_uboone_bnb_kdif.fcl"
+
+physics.producers.generator.scalar_mass: 0.180
+physics.producers.generator.model_theta: 6.17e-4
+physics.producers.generator.max_weight: 1.95868e-11

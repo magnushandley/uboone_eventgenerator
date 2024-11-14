@@ -1,0 +1,3 @@
+#include "standard_overlay_gen_hnl_uboone_numi_fhc.fcl"
+
+physics.producers.generator: @local::microboone_heavy_neutral_lepton_gen_numi_fhc_kdif

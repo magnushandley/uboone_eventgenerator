@@ -1,0 +1,5 @@
+#include "prod_koto_uboone_numi_fhc_kdar_cosmic.fcl"
+
+physics.producers.generator.scalar_mass: 0.180
+physics.producers.generator.model_theta: 6.17e-4
+physics.producers.generator.max_weight: 4.90908e-10

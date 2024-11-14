@@ -1,0 +1,2 @@
+#include "prod_koto_uboone_bnb_scalar_mass_130.fcl"
+physics.producers.generator.flux_access_schema: ifdh

@@ -1,0 +1,12 @@
+#include "heavy_neutral_lepton_gen_numi.fcl"
+#include "standard_overlay_gen_driver.fcl"
+
+process_name: OverlayHeavyNeutralLeptonGenNuMIRHC
+
+#outputs.out1.fileName:    "%ifb_gen.root" 
+
+# WARNING: these parameters should be set according to your needs
+# default HNL_mass: 100 MeV
+# default model_theta: 5e-4
+# default max_weight: 0 (save all events regardless of weight, e.g. for training samples)
+physics.producers.generator: @local::microboone_heavy_neutral_lepton_gen_numi_rhc

@@ -1,0 +1,2 @@
+#include "standard_overlay_gen_koto_uboone_numi_rhc_kdif_scalar_mass_180.fcl"
+physics.producers.generator.flux_access_schema: ifdh
