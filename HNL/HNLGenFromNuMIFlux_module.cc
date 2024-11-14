@@ -330,23 +330,10 @@ void hnlgen::HNLGenFromNuMIFlux::produce(art::Event& e)
         fEventTree_flux_weight = r99->second.Z();
       }
       
-      //Magnus edit for ns timing
+      //Edit for ns timing
 
       //Details from https://github.com/NuSoftHEP/nutools/blob/v2_18_01/nutools/EventGeneratorBase/GENIE/EvtTimeFNALBeam.cxx
-      
-      //auto const seed = 123;
-      //auto urbg = std::mt19937 {seed};  
-      //double const mu = 0.0; 
-      //double const sigma = 1.308; //ns
-      //auto norm = std::normal_distribution<double>{mu,sigma};
-      //auto gauss = norm(urbg);
-      //double bunch_spacing = 18.936; //ns
-
-      //std::cout << "fRNG: "<< fRNG << std::endl;
-
-      //double time_shift_crude = fGlobalTimeOffset+CLHEP::RandFlat::shoot(&fRNG,fBeamWindowDuration);
-      //double time_shift = ((int) (time_shift_crude / bunch_spacing)) * bunch_spacing;
-      //time_shift += gauss;
+   
       EvtTimeFNALBeam evtTime;
       double time_shift = fGlobalTimeOffset + evtTime.TimeOffset();
 
@@ -381,7 +368,7 @@ void hnlgen::HNLGenFromNuMIFlux::produce(art::Event& e)
       fEventTree_daughter2_pdg = d2.first;
       fEventTree_selected = selected;
 
-      //Added by Magnus
+      //Added by magnus for diagnostics
       fEventTree_time_shift = time_shift;
       fEventTree_unshifted_time = dk_pos.T();
 

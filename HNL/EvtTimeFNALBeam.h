@@ -8,7 +8,7 @@ class EvtTimeFNALBeam {
 public:
     EvtTimeFNALBeam(); // Constructor
 
-    double TimeOffset(); // Member function
+    double TimeOffset(); 
 
 private:
     double fTimeBetweenBuckets;
