@@ -35,6 +35,7 @@
 
 #include "GenKinematics.h"
 #include "FluxReaderNuMI.h"
+#include "EvtTimeFNALBeam.h"
 
 #include <memory>
 
@@ -333,7 +334,18 @@ void hpsgen::HiggsPortalScalarGenFromNuMIFlux::produce(art::Event& e)
         fEventTree_flux_weight = r99->second.Z();
         //const double qq = (fScalarParams == "random" ? model_theta : 0.);
       }
-      TLorentzVector shift_to_detector_time(0.,0.,0.,fGlobalTimeOffset+CLHEP::RandFlat::shoot(&fRNG,fBeamWindowDuration));
+
+      //Edit for ns timing
+
+      //Details from https://github.com/NuSoftHEP/nutools/blob/v2_18_01/nutools/EventGeneratorBase/GENIE/EvtTimeFNALBeam.cxx
+      
+      //NuMI has one batch per spill
+
+      EvtTimeFNALBeam evtTime;
+      evtTime.nbatch = 6;
+      double time_shift = fGlobalTimeOffset + evtTime.TimeOffset();
+
+      TLorentzVector shift_to_detector_time(0.,0.,0.,time_shift);
 
       fEventTree_kaon_mom_x = kaon_4mom.X();
       fEventTree_kaon_mom_y = kaon_4mom.Y();

@@ -33,6 +33,7 @@
 
 #include "GenKinematics.h"
 #include "FluxReaderBNB.h"
+#include "EvtTimeFNALBeam.h"
 
 namespace hpsgen {
   class HiggsPortalScalarGenFromBNBFlux;
@@ -318,7 +319,18 @@ void hpsgen::HiggsPortalScalarGenFromBNBFlux::produce(art::Event& e)
         }
       }
       
-      TLorentzVector shift_to_detector_time(0.,0.,0.,fGlobalTimeOffset+CLHEP::RandFlat::shoot(&fRNG,fBeamWindowDuration));
+      //Edit for ns timing
+
+      //Details from https://github.com/NuSoftHEP/nutools/blob/v2_18_01/nutools/EventGeneratorBase/GENIE/EvtTimeFNALBeam.cxx
+      
+      //BNB has one batch per spill
+
+      EvtTimeFNALBeam evtTime;
+      evtTime.nbatch = 1;
+      double time_shift = fGlobalTimeOffset + evtTime.TimeOffset();
+
+      TLorentzVector shift_to_detector_time(0.,0.,0.,time_shift);
+
       const double dk_t = (dk_pos+shift_to_detector_time).T();
       if(!fBeamWindowCut.empty() && ( dk_t < fBeamWindowCut.front() || dk_t > fBeamWindowCut.back() )) {
         selected=false;
