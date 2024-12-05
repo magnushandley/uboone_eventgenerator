@@ -7,8 +7,8 @@
 class EvtTimeFNALBeam {
 public:
     EvtTimeFNALBeam(); // Constructor
-
-    double TimeOffset(); 
+    double TimeOffset();
+    int nbatch;
 
 private:
     double fTimeBetweenBuckets;
@@ -16,7 +16,6 @@ private:
     int fNBucketsPerBatch;
     int fNFilledBucketsPerBatch;
     double fGlobalOffset;
-    double nbatch;
 };
 
 #endif // EVTTIMEFNALBEAM_H

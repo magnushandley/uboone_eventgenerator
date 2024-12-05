@@ -4,12 +4,12 @@
 
 
 EvtTimeFNALBeam::EvtTimeFNALBeam() 
-    : fTimeBetweenBuckets(1e9 / 53.103e6),
+    : nbatch(6), 
+      fTimeBetweenBuckets(1e9 / 53.103e6),
       fBucketTimeSigma(0.750),
       fNBucketsPerBatch(84),     // NOvA-era 81+3, MINOS-era 81+5
-      fNFilledBucketsPerBatch(81),  // 81 for both eras
-      fGlobalOffset(0.0),
-      nbatch(6) {
+      fNFilledBucketsPerBatch(81), // 81 for both eras 
+      fGlobalOffset(0.0){
 }
 
 double EvtTimeFNALBeam::TimeOffset() {

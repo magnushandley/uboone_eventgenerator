@@ -33,6 +33,7 @@
 
 #include "GenKinematics.h"
 #include "FluxReaderBNB.h"
+#include "EvtTimeFNALBeam.h"
 
 namespace hnlgen {
   class HNLGenFromBNBFlux;
@@ -314,23 +315,15 @@ void hnlgen::HNLGenFromBNBFlux::produce(art::Event& e)
         fEventTree_flux_weight = r99->second.Z();
       }
       
-      //Magnus edit for ns timing
+      //Edit for ns timing
 
       //Details from https://github.com/NuSoftHEP/nutools/blob/v2_18_01/nutools/EventGeneratorBase/GENIE/EvtTimeFNALBeam.cxx
       
-      auto const seed = 123;
-      auto urbg = std::mt19937 {seed};  
-      double const mu = 0.0; 
-      double const sigma = 0.750; //ns
-      auto norm = std::normal_distribution<double>{mu,sigma};
-      auto gauss = norm(urbg);
-      double bunch_spacing = 18.831; //ns
+      //BNB has one batch per spill
 
-      //std::cout << "fRNG: "<< fRNG << std::endl;
-
-      double time_shift_crude = fGlobalTimeOffset+CLHEP::RandFlat::shoot(&fRNG,fBeamWindowDuration);
-      double time_shift = ((int) (time_shift_crude / bunch_spacing)) * bunch_spacing;
-      time_shift += gauss;
+      EvtTimeFNALBeam evtTime;
+      evtTime.nbatch = 1;
+      double time_shift = fGlobalTimeOffset + evtTime.TimeOffset();
 
       TLorentzVector shift_to_detector_time(0.,0.,0.,time_shift);
 

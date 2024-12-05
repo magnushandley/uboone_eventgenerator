@@ -227,25 +227,15 @@ TLorentzVector hnlgen::GenKinematics::gen_random_hnl_decay_pos(const TLorentzVec
     const double model_tau, rng& rand, const double* lambdas, double& weight) const {
   const double gamma = hnl4mom.Gamma();
   const double speed = hnl4mom.Beta() * consts.speed_light();
-  //std::cout << "speed " << speed << std::endl;
   const double a = std::min(lambdas[0],lambdas[1])/speed;
-  //std::cout << "a " << a << std::endl;
   const double b = std::max(lambdas[0],lambdas[1])/speed;
-  //std::cout << "b " << b << std::endl;
   const double probA =  std::exp(-a/gamma/model_tau);
-  //std::cout << "probA " << probA << std::endl;
   const double probB =  std::exp(-b/gamma/model_tau);
-  //std::cout << "probB " << probB << std::endl;
   weight = probA - probB; // integral along exponential;
-  //std::cout << "weight " << weight << std::endl;
   const double p0 = CLHEP::RandFlat::shoot(&rand);
-  //std::cout << "p0 " << p0 << std::endl;
-  //Magnus: try to go with minus here - who knows
   const double length = (a + b - gamma*model_tau*std::log(std::exp(b/gamma/model_tau)*(1-p0) + std::exp(a/gamma/model_tau)*p0))*speed;
-  //std::cout << "length " << length << std::endl;
   const TVector3 traj = length * hnl4mom.Vect().Unit();
   const double time_lab = traj.Mag() / speed;
-  //std::cout << "time_lab " << time_lab << std::endl;
   const TLorentzVector traj4(traj,time_lab);
   return parpos+traj4;
 }

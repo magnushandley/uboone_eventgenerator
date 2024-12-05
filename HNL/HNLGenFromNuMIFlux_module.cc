@@ -334,7 +334,10 @@ void hnlgen::HNLGenFromNuMIFlux::produce(art::Event& e)
 
       //Details from https://github.com/NuSoftHEP/nutools/blob/v2_18_01/nutools/EventGeneratorBase/GENIE/EvtTimeFNALBeam.cxx
    
+      //NuMI has six batches per spill
+
       EvtTimeFNALBeam evtTime;
+      evtTime.nbatch = 6;
       double time_shift = fGlobalTimeOffset + evtTime.TimeOffset();
 
       TLorentzVector shift_to_detector_time(0.,0.,0.,time_shift);

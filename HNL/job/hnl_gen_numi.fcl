@@ -99,4 +99,7 @@ microboone_hnl_gen_numi_rhc_kdar_dump.cut_kaon_mom: 1e-7
 microboone_hnl_gen_numi_rhc_kdar_dump.cut_kaon_pos: 1
 microboone_hnl_gen_numi_rhc_kdar_dump.cut_kaon_z_pos: 6400
 
+microboone_hnl_gen_numi_rhc_newflux: @local::microboone_hnl_gen_numi
+microboone_hnl_gen_numi_rhc_newflux.flux_location: "/pnfs/uboone/persistent/users/bnayak/flux_files/uboone_beamsim_g4.10.4_nothresh/me000z-200i/run0/files/g4numi_minervame_me000z*.root"
+
 END_PROLOG
